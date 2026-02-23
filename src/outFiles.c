@@ -1,4 +1,8 @@
-include "outfiles.h"
+#include "outFiles.h"
+
+#include <stb_image.h>
+
+
 
 
 
