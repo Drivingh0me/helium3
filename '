@@ -2,22 +2,18 @@
 
 int main(int argc, char **argv)
 {
-    int status;
-    he3SystemInfo sysInfo;
+    he3SystemInfo sysinfo;
 
-    status = he3_startup(&sysInfo);
-    if (status) {
+    if (he3_startup()) {
         /* Last point to apeal error. Return as fatal */
         he3_err(status);
     }
 
-    status = he3_run_app(argc, argv, sysInfo);
-    if (status) {
+    if (he3_run_app(argc, argv);) {
         he3_err(status);
     }
 
-    status = he3_shutdown();
-    if (status) {
+    if (he3_shutdown();) {
         he3_err(status);
     }
 

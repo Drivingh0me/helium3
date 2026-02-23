@@ -37,7 +37,7 @@ typedef struct {
     FILE **files;
 } he3UserCommand;
 
-void cleanup()
+static void cleanup()
 {
     printf("Cleaning up.\n");
 }
@@ -46,28 +46,32 @@ void he3_err(int errno)
 {
     if (errno < 0) {
         /* Uses ANSI escape sequence to color error message. */
-        printf("\033[31mFATAL ERROR: %d\033[0m\n", errno);
+        printf(RED "FATAL ERROR: %d" RESET "\n", errno);
         cleanup();
         exit(errno);
     } else {
-        printf("\033[31mRECOVERABLE ERROR: %d BECAME FATAL. "
-               "This is likely a bug.\033[0m\n", errno);
+        printf(RED "RECOVERABLE ERROR: %d BECAME FATAL. "
+               "This is likely a bug." RESET "\n", errno);
         cleanup();
         exit(errno);
     }
 }
 
-int parse_args(int argc, char **argv, he3UserCommand *command)
+static int parse_args(int argc, char **argv, he3UserCommand *command)
 {
+    if (argc = 1) {
+        run_tui();
+    }
+
     return 0;
 }
 
-void he3_export()
+static void he3_export()
 {
     printf("Exporting.\n");
 }
 
-int he3_run_analysis(he3Dataset data)
+static int he3_run_analysis(he3Dataset data)
 {
     char should_export = 0;
 
@@ -78,20 +82,20 @@ int he3_run_analysis(he3Dataset data)
     return 0;
 }
 
-int he3_coalesce_data(he3UserCommand command, he3Dataset *dataset)
+static int he3_coalesce_data(he3UserCommand command, he3Dataset *dataset)
 {
     printf("Coalescing data.\n");
 
-    return 0;
+    return 1;
 }
 
-int he3_startup()
+int he3_startup(he3SystemInfo *sysInfo)
 {
     // Check system info.
     return 0;
 }
 
-int he3_run_app(int argc, char **argv)
+int he3_run_app(int argc, char **argv, he3SystemInfo sysInfo)
 {
     int status = -1;
     he3UserCommand userCommand;
