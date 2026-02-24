@@ -35,7 +35,7 @@ typedef struct {
     unsigned char *flags;
     unsigned int files_len;
     FILE **files;
-} he3UserCommand;
+} tuiUserCommand;
 
 static void cleanup()
 {
@@ -46,21 +46,21 @@ void he3_err(int errno)
 {
     if (errno < 0) {
         /* Uses ANSI escape sequence to color error message. */
-        printf(RED "FATAL ERROR: %d" RESET "\n", errno);
+        printf(REDBOLD "FATAL ERROR: %d" RESET "\n", errno);
         cleanup();
         exit(errno);
     } else {
-        printf(RED "RECOVERABLE ERROR: %d BECAME FATAL. "
-               "This is likely a bug." RESET "\n", errno);
+        printf(REDBOLD "RECOVERABLE ERROR: %d BECAME FATAL.\n" RESET
+               "This is likely a bug.\n", errno);
         cleanup();
         exit(errno);
     }
 }
 
-static int parse_args(int argc, char **argv, he3UserCommand *command)
+static int parse_args(int argc, char **argv, tuiUserCommand *command)
 {
-    if (argc = 1) {
-        run_tui();
+    if (argc == 1) {
+        run_tui(command);
     }
 
     return 0;
@@ -86,7 +86,7 @@ static int he3_coalesce_data(he3UserCommand command, he3Dataset *dataset)
 {
     printf("Coalescing data.\n");
 
-    return 1;
+    return 0;
 }
 
 int he3_startup(he3SystemInfo *sysInfo)
