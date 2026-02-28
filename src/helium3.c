@@ -29,14 +29,6 @@ typedef struct {
     he3DataLite data_arr;
 } he3DatasetLite;
 
-typedef struct {
-    char *flag_info; /* flag, files index, number of files */
-    unsigned short flag_len;
-    unsigned char *flags;
-    unsigned int files_len;
-    FILE **files;
-} tuiUserCommand;
-
 static void cleanup()
 {
     printf("Cleaning up.\n");
@@ -57,10 +49,10 @@ void he3_err(int errno)
     }
 }
 
-static int parse_args(int argc, char **argv, tuiUserCommand *command)
+static int parse_args(int argc, char **argv, tuiRequest *request)
 {
     if (argc == 1) {
-        run_tui(command);
+        run_tui(request);
     }
 
     return 0;
@@ -74,15 +66,21 @@ static void he3_export()
 static int he3_run_analysis(he3Dataset data)
 {
     char should_export = 0;
+    int status;
 
     if (should_export) {
         he3_export();
     }
 
+    status = fit();
+    if (status) {
+        return 3;
+    }
+
     return 0;
 }
 
-static int he3_coalesce_data(he3UserCommand command, he3Dataset *dataset)
+static int he3_coalesce_data(tuiRequest request, he3Dataset *dataset)
 {
     printf("Coalescing data.\n");
 
@@ -98,7 +96,7 @@ int he3_startup(he3SystemInfo *sysInfo)
 int he3_run_app(int argc, char **argv, he3SystemInfo sysInfo)
 {
     int status = -1;
-    he3UserCommand userCommand;
+    tuiRequest userCommand;
     he3Dataset dataset;
 
     status = parse_args(argc, argv, &userCommand);

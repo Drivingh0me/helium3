@@ -23,6 +23,6 @@ typedef struct {
 #define COLOR256 "\033[38;5;%dm"
 #define REDBOLD "\033[1;31m"
 
-void run_tui(tuiUserCommand *command));
+void run_tui(tuiRequest *request);
 
 #endif /* TUI_H */
