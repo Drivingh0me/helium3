@@ -19,7 +19,7 @@ ifeq ($(OS), Windows) # 64 bit only.
 OS_INCLUDE_DIR := /opt/homebrew/opt/glfw/include
 endif
 
-GSL := -lgsl -lgslcblas -lm
+GSL := -I/opt/homebrew/opt/gsl/include -lgsl -lgslcblas -lm
 
 CC := gcc
 CFLAGS := -Wall -Wextra -I$(INCLUDE_DIR) -I$(OS_INCLUDE_DIR) $(GSL)
