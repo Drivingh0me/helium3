@@ -1,0 +1,1 @@
+gcc src/main.c src/math.c src/tui.c src/outFiles.c src/helium3.c -o build/manualBuild -Wall -Wextra -lgsl -Iinclude -I/usr/local/include -IOSspecific -L/usr/local/lib

@@ -2,7 +2,7 @@
 #define TUI_H
 
 typedef struct {
-    unsigned short numOfreq;
+    unsigned short numOfReq;
     unsigned char *requests;
     unsigned short numOfPaths;
     char **paths;

@@ -55,6 +55,13 @@ static int parse_args(int argc, char **argv, tuiRequest *request)
         run_tui(request);
     }
 
+    if (argc > 1) {
+        if (argv[2][0] == '-') {
+            request->requests[0] = 1;
+            request->numOfReq = 1;
+        }
+    }
+
     return 0;
 }
 
